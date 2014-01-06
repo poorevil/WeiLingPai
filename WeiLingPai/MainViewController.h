@@ -10,4 +10,7 @@
 
 @interface MainViewController : UIViewController
 
+@property (nonatomic,retain) IBOutlet UIView *sliderViewParent;
+@property (nonatomic,retain) IBOutlet UITableView *mTableView;
+
 @end
