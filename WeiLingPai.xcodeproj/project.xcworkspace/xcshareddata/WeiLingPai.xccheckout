@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>191E6E4D-6096-4BE9-A746-AE99429BB89E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>WeiLingPai</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>6EB47298-401A-45D0-B694-5B2256953BC1</key>
+		<string>https://github.com/poorevil/WeiLingPai.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>WeiLingPai.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>6EB47298-401A-45D0-B694-5B2256953BC1</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/poorevil/WeiLingPai.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6EB47298-401A-45D0-B694-5B2256953BC1</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6EB47298-401A-45D0-B694-5B2256953BC1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>WeiLingPai</string>
+		</dict>
+	</array>
+</dict>
+</plist>

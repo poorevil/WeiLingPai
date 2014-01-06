@@ -13,7 +13,6 @@
 		4E02337F1865F99800BC1E61 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E02337D1865F99800BC1E61 /* InfoPlist.strings */; };
 		4E0233811865F99800BC1E61 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4E0233801865F99800BC1E61 /* main.mm */; };
 		4E0233851865F99800BC1E61 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0233841865F99800BC1E61 /* AppDelegate.m */; };
-		4E0233881865F99800BC1E61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E0233861865F99800BC1E61 /* Main.storyboard */; };
 		4E02338B1865F99800BC1E61 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4E02338A1865F99800BC1E61 /* ViewController.mm */; };
 		4E02338D1865F99800BC1E61 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E02338C1865F99800BC1E61 /* Images.xcassets */; };
 		4E0233941865F99800BC1E61 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E0233931865F99800BC1E61 /* XCTest.framework */; };
@@ -38,6 +37,8 @@
 		4EE0E899186711B300C7B233 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0E88E186711B300C7B233 /* AFURLRequestSerialization.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4EE0E89A186711B300C7B233 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0E890186711B300C7B233 /* AFURLResponseSerialization.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4EE0E89B186711B300C7B233 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0E892186711B300C7B233 /* AFURLSessionManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		C17AA364187A52A300CF3E14 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C17AA362187A52A300CF3E14 /* MainViewController.m */; };
+		C17AA365187A52A300CF3E14 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C17AA363187A52A300CF3E14 /* MainViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,7 +83,6 @@
 		4E0233821865F99800BC1E61 /* WeiLingPai-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WeiLingPai-Prefix.pch"; sourceTree = "<group>"; };
 		4E0233831865F99800BC1E61 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4E0233841865F99800BC1E61 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		4E0233871865F99800BC1E61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4E0233891865F99800BC1E61 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		4E02338A1865F99800BC1E61 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		4E02338C1865F99800BC1E61 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -118,6 +118,9 @@
 		4EE0E890186711B300C7B233 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		4EE0E891186711B300C7B233 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		4EE0E892186711B300C7B233 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		C17AA361187A52A300CF3E14 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		C17AA362187A52A300CF3E14 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		C17AA363187A52A300CF3E14 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,14 +196,19 @@
 		4E02337A1865F99800BC1E61 /* WeiLingPai */ = {
 			isa = PBXGroup;
 			children = (
+				C17AA359187A526400CF3E14 /* Controller */,
+				C17AA35A187A526400CF3E14 /* interface */,
+				C17AA35B187A526400CF3E14 /* View */,
 				4EE0E87F186711B300C7B233 /* AFNetworking */,
 				4E0233831865F99800BC1E61 /* AppDelegate.h */,
 				4E0233841865F99800BC1E61 /* AppDelegate.m */,
-				4E0233861865F99800BC1E61 /* Main.storyboard */,
 				4E0233891865F99800BC1E61 /* ViewController.h */,
 				4E02338A1865F99800BC1E61 /* ViewController.mm */,
 				4E02338C1865F99800BC1E61 /* Images.xcassets */,
 				4E02337B1865F99800BC1E61 /* Supporting Files */,
+				C17AA361187A52A300CF3E14 /* MainViewController.h */,
+				C17AA362187A52A300CF3E14 /* MainViewController.m */,
+				C17AA363187A52A300CF3E14 /* MainViewController.xib */,
 			);
 			path = WeiLingPai;
 			sourceTree = "<group>";
@@ -267,6 +275,27 @@
 				4EE0E892186711B300C7B233 /* AFURLSessionManager.m */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		C17AA359187A526400CF3E14 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C17AA35A187A526400CF3E14 /* interface */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = interface;
+			sourceTree = "<group>";
+		};
+		C17AA35B187A526400CF3E14 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -370,8 +399,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E02338D1865F99800BC1E61 /* Images.xcassets in Resources */,
+				C17AA365187A52A300CF3E14 /* MainViewController.xib in Resources */,
 				4E02337F1865F99800BC1E61 /* InfoPlist.strings in Resources */,
-				4E0233881865F99800BC1E61 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +423,7 @@
 				4E02338B1865F99800BC1E61 /* ViewController.mm in Sources */,
 				4EE0E894186711B300C7B233 /* AFHTTPRequestOperationManager.m in Sources */,
 				4EE0E896186711B300C7B233 /* AFNetworkReachabilityManager.m in Sources */,
+				C17AA364187A52A300CF3E14 /* MainViewController.m in Sources */,
 				4EE0E89A186711B300C7B233 /* AFURLResponseSerialization.m in Sources */,
 				4EE0E898186711B300C7B233 /* AFURLConnectionOperation.m in Sources */,
 				4EE0E897186711B300C7B233 /* AFSecurityPolicy.m in Sources */,
@@ -435,14 +465,6 @@
 				4E02337E1865F99800BC1E61 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		4E0233861865F99800BC1E61 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4E0233871865F99800BC1E61 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		4E02339C1865F99800BC1E61 /* InfoPlist.strings */ = {
