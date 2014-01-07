@@ -16,11 +16,10 @@
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
-    MainViewController *mainViewController = [[MainViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-    [mainViewController release];
+    self.mainViewController = [[[MainViewController alloc] init] autorelease];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
     
-    [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:35.0/255.0 green:38.0/255.0 blue:43.0/255.0 alpha:1.0]];
     nav.navigationBar.translucent = NO;
     nav.navigationBar.tintColor = [UIColor whiteColor];
     

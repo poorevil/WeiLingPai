@@ -10,4 +10,25 @@
 
 @implementation PortalModel
 
+-(id)initWithDictionary:(NSDictionary *)dict
+{
+    if (self = [super init]) {
+        self.name = [dict objectForKey:@"name"];
+        self.pid = [dict objectForKey:@"pid"];
+        self.iconFileName = [dict objectForKey:@"iconFileName"];
+        self.lastLogin = [[dict objectForKey:@"lastLogin"] doubleValue];
+    }
+    
+    return self;
+}
+
+-(void)dealloc
+{
+    self.name = nil;
+    self.pid = nil;
+    self.iconFileName = nil;
+    
+    [super dealloc];
+}
+
 @end

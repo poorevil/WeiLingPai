@@ -26,9 +26,11 @@
         
         self.portalArray = [NSMutableArray array];
         
-        for (int i=0; i<6; i++) {
-            PortalModel *model = [[[PortalModel alloc] init] autorelease];
-            //TODO:init model
+        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"portalList" ofType:@"plist"];
+        NSArray *portalList = [[NSArray alloc] initWithContentsOfFile:plistPath];
+        
+        for (NSDictionary *dict in portalList) {
+            PortalModel *model = [[[PortalModel alloc] initWithDictionary:dict] autorelease];
             
             [self.portalArray addObject:model];
         }

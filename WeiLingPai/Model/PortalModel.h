@@ -10,4 +10,11 @@
 
 @interface PortalModel : NSObject
 
+@property (nonatomic,retain) NSString *pid;
+@property (nonatomic,retain) NSString *name;
+@property (nonatomic,assign) NSTimeInterval lastLogin;
+@property (nonatomic,retain) NSString *iconFileName;
+
+-(id)initWithDictionary:(NSDictionary *)dict;
+
 @end

@@ -44,7 +44,6 @@
     tileView.model = model;
     [self.leftView addSubview:tileView];
     
-    //TODO:add tap action
 }
 
 -(void)setRightViewByProtal:(PortalModel *)model
@@ -56,7 +55,6 @@
     tileView.model = model;
     [self.rightView addSubview:tileView];
 
-    //TODO:add tap action
 }
 
 -(void)dealloc

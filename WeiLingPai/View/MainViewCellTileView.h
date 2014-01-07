@@ -14,4 +14,7 @@
 
 @property (nonatomic,retain) PortalModel *model;
 
+@property (nonatomic,retain) IBOutlet UIImageView *iconView;
+@property (nonatomic,retain) IBOutlet UILabel *lastLoginLabel;
+
 @end
