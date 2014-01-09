@@ -10,9 +10,14 @@
 #import "PortalModel.h"
 #import "MainViewCell.h"
 
+#import "CycleScrollView.h"
+
 @interface MainViewController () <UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,retain) NSMutableArray *portalArray;
+
+@property (nonatomic,retain) CycleScrollView *cycleScrollView;//循环滚动scrollView
+@property (nonatomic,retain) NSMutableArray *headerScrollViewArray;//轮播图数组
 
 @end
 
