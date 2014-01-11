@@ -10,6 +10,18 @@
 
 @implementation SliderModel
 
+-(id)initWithDict:(NSDictionary *)dict
+{
+    if (self = [super init]) {
+        self.sid = [dict objectForKey:@"sid"];
+        self.title = [dict objectForKey:@"title"];
+        self.openUrl = [dict objectForKey:@"openUrl"];
+        self.imageUrl = [dict objectForKey:@"imageUrl"];
+    }
+    return self;
+}
+
+
 -(void)dealloc
 {
     self.sid = nil;

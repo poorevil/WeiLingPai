@@ -15,4 +15,5 @@
     #import <Foundation/Foundation.h>
 #endif
 
-#define BASEURL     @"http://wlp.groupsreader.com"
+#define BASEURL     @"http://127.0.0.1:8000"//@"http://wlp.groupsreader.com"
+#define APP_ID      @"default"

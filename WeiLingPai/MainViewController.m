@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "PortalModel.h"
 #import "MainViewCell.h"
+#import "MainViewHeaderView.h"
 
 #import "CycleScrollView.h"
 
@@ -52,6 +53,10 @@
 	[self.navigationItem setTitle:@"微令牌"];
     self.sliderViewParent.backgroundColor = [UIColor blackColor];
     
+    MainViewHeaderView *headerView = [[[NSBundle mainBundle] loadNibNamed:@"MainViewHeaderView"
+                                                                   owner:self
+                                                                  options:nil] objectAtIndex:0];
+    [self.sliderViewParent addSubview:headerView];
 }
 
 - (void)didReceiveMemoryWarning

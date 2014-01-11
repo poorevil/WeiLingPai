@@ -7,6 +7,10 @@
 //
 
 #import "MainViewHeaderView.h"
+#import "AFHTTPRequestOperationManager.h"
+#import "SliderResponseSerializer.h"
+#import "SliderModel.h"
+#import "EGOImageView.h"
 
 @implementation MainViewHeaderView
 
@@ -45,6 +49,67 @@
 //    
 //    self.titleBgView.alpha = 0;
     
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *parameters = @{@"appid": APP_ID};
+    manager.responseSerializer = [SliderResponseSerializer serializer];
+    [manager GET:[NSString stringWithFormat:@"%@/sliderList",BASEURL]
+      parameters:parameters
+         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             NSLog(@"Success: %@", [responseObject class]);
+             
+             if ([responseObject isKindOfClass:[NSArray class]]) {
+                 self.sliderList = [NSMutableArray arrayWithArray:responseObject];
+                 
+                 if (self.sliderList.count>0) {
+                     [self.cycleScrollView removeFromSuperview];
+                     self.cycleScrollView = nil;
+                     self.headerScrollViewArray = [NSMutableArray array];
+                     
+                     //初始化轮播数组内容
+                     for (int i=0;i<self.sliderList.count;i++) {
+                         SliderModel *model = [self.sliderList objectAtIndex:i];
+                         //创建首页轮播图item
+                         EGOImageView *imageView = [[EGOImageView alloc]
+                                                    initWithFrame:CGRectMake(0,0
+                                                                             , self.frame.size.width
+                                                                             , self.frame.size.width)];
+                         imageView.contentMode = UIViewContentModeScaleToFill;
+                         
+                         imageView.imageURL = [NSURL URLWithString:model.imageUrl];
+                         imageView.userInteractionEnabled = YES;
+                         
+                         //添加点击事件
+                         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                               action:@selector(showDetail:)];
+                         [imageView addGestureRecognizer:tap];
+                         [tap release];
+                         
+                         
+                         
+                         [self.headerScrollViewArray addObject:imageView];
+                         [imageView release];
+                     }
+                     
+                     self.cycleScrollView = [[[CycleScrollView alloc]
+                                              initWithFrame:CGRectMake(0, 0, 320, 320)
+                                              cycleDirection:CycleDirectionLandscape
+                                              views:self.headerScrollViewArray] autorelease];
+                     self.cycleScrollView.delegate = self;
+                     [self insertSubview:self.cycleScrollView
+                            belowSubview:self.titleBgView];
+                     
+                     self.slideShowTitleLabel.text = [[self.sliderList objectAtIndex:0] title];
+                     
+                     
+                     [self showAutoPlay];
+                     
+                 }
+                 
+             }
+             
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"Error: %@", error);
+         }];
 }
 
 

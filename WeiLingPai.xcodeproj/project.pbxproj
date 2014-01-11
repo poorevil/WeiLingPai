@@ -56,6 +56,11 @@
 		4E2E3820187EF56B00FAA5E1 /* CycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2E381F187EF56B00FAA5E1 /* CycleScrollView.m */; };
 		4E2E3823187EF69C00FAA5E1 /* MainViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2E3822187EF69C00FAA5E1 /* MainViewHeaderView.m */; };
 		4E2E3825187EF6DA00FAA5E1 /* MainViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E2E3824187EF6DA00FAA5E1 /* MainViewHeaderView.xib */; };
+		4E56C7681881944E00F4BF55 /* SliderResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56C7671881944E00F4BF55 /* SliderResponseSerializer.m */; };
+		4E56C77318819E2200F4BF55 /* EGOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56C76D18819E2200F4BF55 /* EGOCache.m */; };
+		4E56C77418819E2200F4BF55 /* EGOImageLoadConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56C77018819E2200F4BF55 /* EGOImageLoadConnection.m */; };
+		4E56C77518819E2200F4BF55 /* EGOImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56C77218819E2200F4BF55 /* EGOImageLoader.m */; };
+		4E56C77918819E7D00F4BF55 /* EGOImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56C77818819E7D00F4BF55 /* EGOImageView.m */; };
 		4ED66063187F044700751208 /* SliderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED66062187F044700751208 /* SliderModel.m */; };
 		4EE0E87E1866C39500C7B233 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE0E87D1866C39500C7B233 /* CoreMedia.framework */; };
 		4EE0E893186711B300C7B233 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0E881186711B300C7B233 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -163,6 +168,16 @@
 		4E2E3821187EF69C00FAA5E1 /* MainViewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewHeaderView.h; sourceTree = "<group>"; };
 		4E2E3822187EF69C00FAA5E1 /* MainViewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewHeaderView.m; sourceTree = "<group>"; };
 		4E2E3824187EF6DA00FAA5E1 /* MainViewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewHeaderView.xib; sourceTree = "<group>"; };
+		4E56C7661881944E00F4BF55 /* SliderResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderResponseSerializer.h; sourceTree = "<group>"; };
+		4E56C7671881944E00F4BF55 /* SliderResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderResponseSerializer.m; sourceTree = "<group>"; };
+		4E56C76C18819E2200F4BF55 /* EGOCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOCache.h; sourceTree = "<group>"; };
+		4E56C76D18819E2200F4BF55 /* EGOCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOCache.m; sourceTree = "<group>"; };
+		4E56C76F18819E2200F4BF55 /* EGOImageLoadConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageLoadConnection.h; sourceTree = "<group>"; };
+		4E56C77018819E2200F4BF55 /* EGOImageLoadConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageLoadConnection.m; sourceTree = "<group>"; };
+		4E56C77118819E2200F4BF55 /* EGOImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageLoader.h; sourceTree = "<group>"; };
+		4E56C77218819E2200F4BF55 /* EGOImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageLoader.m; sourceTree = "<group>"; };
+		4E56C77718819E7D00F4BF55 /* EGOImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageView.h; sourceTree = "<group>"; };
+		4E56C77818819E7D00F4BF55 /* EGOImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageView.m; sourceTree = "<group>"; };
 		4ED66061187F044700751208 /* SliderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderModel.h; sourceTree = "<group>"; };
 		4ED66062187F044700751208 /* SliderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderModel.m; sourceTree = "<group>"; };
 		4EE0E87D1866C39500C7B233 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -263,11 +278,12 @@
 		4E02337A1865F99800BC1E61 /* WeiLingPai */ = {
 			isa = PBXGroup;
 			children = (
+				4E56C76A18819E2200F4BF55 /* EGOImage */,
+				4EA3DB1B1881692200CB244C /* Interface */,
 				4E2E381D187EF56B00FAA5E1 /* CycleScrollView */,
 				4E2E37FF187C5C6F00FAA5E1 /* Controller */,
 				4E2E37EB187B059000FAA5E1 /* Model */,
 				4E2E37D4187AFF6400FAA5E1 /* View */,
-				C17AA35A187A526400CF3E14 /* interface */,
 				4EE0E87F186711B300C7B233 /* AFNetworking */,
 				4E0233831865F99800BC1E61 /* AppDelegate.h */,
 				4E0233841865F99800BC1E61 /* AppDelegate.mm */,
@@ -401,6 +417,54 @@
 			path = CycleScrollView;
 			sourceTree = "<group>";
 		};
+		4E56C76A18819E2200F4BF55 /* EGOImage */ = {
+			isa = PBXGroup;
+			children = (
+				4E56C77618819E7D00F4BF55 /* EGOImageView */,
+				4E56C76B18819E2200F4BF55 /* EGOCache */,
+				4E56C76E18819E2200F4BF55 /* EGOImageLoader */,
+			);
+			path = EGOImage;
+			sourceTree = "<group>";
+		};
+		4E56C76B18819E2200F4BF55 /* EGOCache */ = {
+			isa = PBXGroup;
+			children = (
+				4E56C76C18819E2200F4BF55 /* EGOCache.h */,
+				4E56C76D18819E2200F4BF55 /* EGOCache.m */,
+			);
+			path = EGOCache;
+			sourceTree = "<group>";
+		};
+		4E56C76E18819E2200F4BF55 /* EGOImageLoader */ = {
+			isa = PBXGroup;
+			children = (
+				4E56C76F18819E2200F4BF55 /* EGOImageLoadConnection.h */,
+				4E56C77018819E2200F4BF55 /* EGOImageLoadConnection.m */,
+				4E56C77118819E2200F4BF55 /* EGOImageLoader.h */,
+				4E56C77218819E2200F4BF55 /* EGOImageLoader.m */,
+			);
+			path = EGOImageLoader;
+			sourceTree = "<group>";
+		};
+		4E56C77618819E7D00F4BF55 /* EGOImageView */ = {
+			isa = PBXGroup;
+			children = (
+				4E56C77718819E7D00F4BF55 /* EGOImageView.h */,
+				4E56C77818819E7D00F4BF55 /* EGOImageView.m */,
+			);
+			path = EGOImageView;
+			sourceTree = "<group>";
+		};
+		4EA3DB1B1881692200CB244C /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				4E56C7661881944E00F4BF55 /* SliderResponseSerializer.h */,
+				4E56C7671881944E00F4BF55 /* SliderResponseSerializer.m */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
 		4EE0E87F186711B300C7B233 /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -425,13 +489,6 @@
 				4EE0E892186711B300C7B233 /* AFURLSessionManager.m */,
 			);
 			path = AFNetworking;
-			sourceTree = "<group>";
-		};
-		C17AA35A187A526400CF3E14 /* interface */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = interface;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -580,9 +637,11 @@
 			files = (
 				4E2E3820187EF56B00FAA5E1 /* CycleScrollView.m in Sources */,
 				4EE0E893186711B300C7B233 /* AFHTTPRequestOperation.m in Sources */,
+				4E56C77318819E2200F4BF55 /* EGOCache.m in Sources */,
 				4E02338B1865F99800BC1E61 /* ViewController.mm in Sources */,
 				4EE0E894186711B300C7B233 /* AFHTTPRequestOperationManager.m in Sources */,
 				4EE0E896186711B300C7B233 /* AFNetworkReachabilityManager.m in Sources */,
+				4E56C7681881944E00F4BF55 /* SliderResponseSerializer.m in Sources */,
 				4E2E3823187EF69C00FAA5E1 /* MainViewHeaderView.m in Sources */,
 				C17AA364187A52A300CF3E14 /* MainViewController.m in Sources */,
 				4EE0E89A186711B300C7B233 /* AFURLResponseSerialization.m in Sources */,
@@ -590,9 +649,12 @@
 				4E2E37E6187B02EA00FAA5E1 /* MainViewCellTileView.m in Sources */,
 				4EE0E897186711B300C7B233 /* AFSecurityPolicy.m in Sources */,
 				4EE0E895186711B300C7B233 /* AFHTTPSessionManager.m in Sources */,
+				4E56C77918819E7D00F4BF55 /* EGOImageView.m in Sources */,
+				4E56C77518819E2200F4BF55 /* EGOImageLoader.m in Sources */,
 				4ED66063187F044700751208 /* SliderModel.m in Sources */,
 				4EE0E899186711B300C7B233 /* AFURLRequestSerialization.m in Sources */,
 				4E2E37EE187B05BE00FAA5E1 /* PortalModel.m in Sources */,
+				4E56C77418819E2200F4BF55 /* EGOImageLoadConnection.m in Sources */,
 				4EE0E89B186711B300C7B233 /* AFURLSessionManager.m in Sources */,
 				4E2E37D7187AFF6F00FAA5E1 /* MainViewCell.m in Sources */,
 				4E0233851865F99800BC1E61 /* AppDelegate.mm in Sources */,

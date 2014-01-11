@@ -15,4 +15,5 @@
 @property (nonatomic,retain) NSString *openUrl;
 @property (nonatomic,retain) NSString *imageUrl;
 
+-(id)initWithDict:(NSDictionary *)dict;
 @end
