@@ -10,10 +10,12 @@
 
 @interface PortalModel : NSObject
 
-@property (nonatomic,retain) NSString *pid;
-@property (nonatomic,retain) NSString *name;
-@property (nonatomic,assign) NSTimeInterval lastLogin;
-@property (nonatomic,retain) NSString *iconFileName;
+@property (nonatomic,retain) NSString *pid;             //唯一标识
+@property (nonatomic,retain) NSString *name;            //名称
+@property (nonatomic,assign) NSTimeInterval lastLogin;  //最后登录时间
+@property (nonatomic,retain) NSString *iconFileName;    //图标
+
+@property (nonatomic,retain) NSString *accessToken;     //访问token,此token需要在第一次使用时，由服务器端生成
 
 -(id)initWithDictionary:(NSDictionary *)dict;
 

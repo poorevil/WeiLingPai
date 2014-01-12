@@ -16,6 +16,7 @@
         self.name = [dict objectForKey:@"name"];
         self.pid = [dict objectForKey:@"pid"];
         self.iconFileName = [dict objectForKey:@"iconFileName"];
+        self.accessToken = [dict objectForKey:@"accessToken"];
         self.lastLogin = [[dict objectForKey:@"lastLogin"] doubleValue];
     }
     
@@ -27,6 +28,7 @@
     self.name = nil;
     self.pid = nil;
     self.iconFileName = nil;
+    self.accessToken = nil;
     
     [super dealloc];
 }

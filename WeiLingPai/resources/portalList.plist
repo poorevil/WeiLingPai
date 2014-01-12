@@ -3,6 +3,8 @@
 <plist version="1.0">
 <array>
 	<dict>
+		<key>accessToken</key>
+		<string></string>
 		<key>name</key>
 		<string>中国电信</string>
 		<key>pid</key>
@@ -13,6 +15,8 @@
 		<string>zgyh</string>
 	</dict>
 	<dict>
+		<key>accessToken</key>
+		<string></string>
 		<key>name</key>
 		<string>中国电信</string>
 		<key>pid</key>
@@ -23,6 +27,8 @@
 		<string>zgdx</string>
 	</dict>
 	<dict>
+		<key>accessToken</key>
+		<string></string>
 		<key>name</key>
 		<string>中国电信</string>
 		<key>pid</key>
@@ -33,6 +39,8 @@
 		<string>zgdx</string>
 	</dict>
 	<dict>
+		<key>accessToken</key>
+		<string></string>
 		<key>name</key>
 		<string>中国电信</string>
 		<key>pid</key>
@@ -43,6 +51,8 @@
 		<string>zgdx</string>
 	</dict>
 	<dict>
+		<key>accessToken</key>
+		<string></string>
 		<key>name</key>
 		<string>中国电信</string>
 		<key>pid</key>
@@ -53,6 +63,8 @@
 		<string>zgdx</string>
 	</dict>
 	<dict>
+		<key>accessToken</key>
+		<string></string>
 		<key>name</key>
 		<string>中国电信</string>
 		<key>pid</key>

@@ -11,6 +11,9 @@
 #import "SliderResponseSerializer.h"
 #import "SliderModel.h"
 #import "EGOImageView.h"
+#import "AppDelegate.h"
+#import "MainViewController.h"
+#import "SVWebViewController.h"
 
 @implementation MainViewHeaderView
 
@@ -205,18 +208,15 @@
 
 -(void)showDetail:(UITapGestureRecognizer *)sender
 {
-//    TaobaokeItemModel *model = [self.taobaokeItemArray objectAtIndex:self.currPageNum];
-//    AppDelegate *mainDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-//    UINavigationController *currentController = (UINavigationController *)mainDelegate.tabBarController.selectedViewController;
-//    
-//    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@&ttid=400000_21125417@txx_iPhone_0.0.0"
-//                                       , model.clickUrl]];
-//    
-//    SVWebViewController *webViewController = [[[SVWebViewController alloc] initWithURL:URL
-//                                                                            thumbImage:[(EGOImageView *)sender.view image]
-//                                                                                 title:model.title] autorelease];
-//    
-//    [currentController pushViewController:webViewController animated:YES];
+    SliderModel *model = [self.sliderList objectAtIndex:self.currPageNum];
+    AppDelegate *mainDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    UINavigationController *currentController = (UINavigationController *)mainDelegate.mainViewController.navigationController;
+    
+    NSURL *URL = [NSURL URLWithString:model.openUrl];
+    
+    SVWebViewController *webViewController = [[[SVWebViewController alloc] initWithURL:URL] autorelease];
+    
+    [currentController pushViewController:webViewController animated:YES];
     
 }
 

@@ -8,7 +8,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PortalDetailViewController">
             <connections>
                 <outlet property="loginBtn" destination="iBG-jO-yOQ" id="TdG-RP-wYg"/>
-                <outlet property="mTableView" destination="OGT-rP-qVZ" id="zcI-wO-au3"/>
+                <outlet property="loginLabel" destination="ifZ-Do-trF" id="dI8-mI-KlR"/>
+                <outlet property="mTableView" destination="bZU-94-uxg" id="JPB-j6-2Jc"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -22,14 +23,14 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBG-jO-yOQ">
-                            <rect key="frame" x="110" y="64" width="100" height="100"/>
+                            <rect key="frame" x="110" y="44" width="100" height="100"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="15"/>
-                            <state key="normal" title="登录" image="login_btn_img.png" backgroundImage="login_btn_bg.png"/>
-                            <state key="selected" title="登录">
+                            <state key="normal" image="login_btn_img.png" backgroundImage="login_btn_bg.png"/>
+                            <state key="selected">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="highlighted" title="登录">
+                            <state key="highlighted">
                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
@@ -37,8 +38,8 @@
                             <rect key="frame" x="49" y="184" width="223" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="扫描网页上的二维码进行登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifZ-Do-trF">
-                            <rect key="frame" x="71" y="187" width="178" height="21"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifZ-Do-trF">
+                            <rect key="frame" x="49" y="187" width="222" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -47,13 +48,15 @@
                     </subviews>
                     <color key="backgroundColor" red="0.13725490196078433" green="0.14901960784313725" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="OGT-rP-qVZ">
-                    <rect key="frame" x="0.0" y="228" width="320" height="340"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bZU-94-uxg">
+                    <rect key="frame" x="20" y="260" width="280" height="154"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" white="0.8989669616" alpha="1" colorSpace="calibratedWhite"/>
+                    <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="NhN-E7-htE"/>
-                        <outlet property="delegate" destination="-1" id="iR5-58-iKz"/>
+                        <outlet property="dataSource" destination="-1" id="8m9-S4-NSZ"/>
+                        <outlet property="delegate" destination="-1" id="kBF-gG-y9J"/>
                     </connections>
                 </tableView>
             </subviews>

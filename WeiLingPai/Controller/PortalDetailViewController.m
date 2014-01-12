@@ -8,6 +8,7 @@
 
 #import "PortalDetailViewController.h"
 #import "PortalModel.h"
+#import "RegisterViewController.h"
 
 @interface PortalDetailViewController () <UITableViewDataSource,UITableViewDelegate>
 
@@ -27,11 +28,43 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     
-    /*
-     * 登录按钮
-     */
+    [self initLoginBtn];
+    [self updateDateAndState];
+    
+    self.title = self.portalModel.name;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+-(void)dealloc
+{
+    self.loginBtn = nil;
+    self.mTableView = nil;
+    self.loginLabel = nil;
+    
+    [super dealloc];
+}
+
+#pragma mark - private method
+
+// 初始化登录按钮
+-(void)initLoginBtn
+{
+    //存在accesstoken，登录按钮
+    if (self.portalModel.accessToken && self.portalModel.accessToken.length>0) {
+        [self.loginBtn setTitle:@"登录" forState:UIControlStateNormal];
+        self.loginLabel.text = @"扫描网页上的二维码进行登录";
+    }else{
+        //不存在accesstoken，绑定账号按钮
+        [self.loginBtn setTitle:@"绑定账号" forState:UIControlStateNormal];
+        self.loginLabel.text = @"扫描网页上的二维码进行绑定账号";
+    }
+    
     // the space between the image and text
     CGFloat spacing = 6.0;
     
@@ -51,21 +84,35 @@
                                                      0.0,
                                                      - titleSize.width);
     
-    self.title = self.portalModel.name;
+    [self.loginBtn addTarget:self
+                      action:@selector(loginBtnAction:)
+            forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)didReceiveMemoryWarning
+-(void)updateDateAndState
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(void)dealloc
-{
-    self.loginBtn = nil;
-    self.mTableView = nil;
+    [self.mTableView reloadData];
     
-    [super dealloc];
+    if (self.portalModel.accessToken && self.portalModel.accessToken.length > 0){
+        self.mTableView.allowsSelection = YES;
+    }else{
+        self.mTableView.allowsSelection = NO;
+    }
+}
+
+-(void)loginBtnAction:(id)sender
+{
+    if (self.portalModel.accessToken && self.portalModel.accessToken.length > 0) {
+
+        //TODO:登录
+        
+    }else{
+        
+        RegisterViewController *registVC = [[[RegisterViewController alloc] initWithNibName:@"RegisterViewController"
+                                                                                     bundle:nil] autorelease];
+        
+        [self.navigationController pushViewController:registVC animated:YES];
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -104,9 +151,28 @@
             break;
     }
     
+    if (self.portalModel.accessToken && self.portalModel.accessToken.length > 0){
+        cell.textLabel.enabled = YES;
+        cell.detailTextLabel.enabled = YES;
+    }else{
+        cell.textLabel.enabled = NO;
+        cell.detailTextLabel.enabled = NO;
+    }
+
+    
     return cell ;
 }
 
-
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.portalModel.accessToken && self.portalModel.accessToken.length > 0) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        
+        
+        
+        
+    }
+}
 
 @end

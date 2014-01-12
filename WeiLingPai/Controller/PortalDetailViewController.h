@@ -15,6 +15,7 @@
 @property (nonatomic,retain) PortalModel *portalModel;
 
 @property (nonatomic,retain) IBOutlet UIButton *loginBtn;
+@property (nonatomic,retain) IBOutlet UILabel *loginLabel;
 @property (nonatomic,retain) IBOutlet UITableView *mTableView;
 
 @end
