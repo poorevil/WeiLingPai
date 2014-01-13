@@ -165,7 +165,9 @@
     
     [manager POST:[NSString stringWithFormat:@"%@regist/clientRegist",BASEURL] parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              //{"regist_result":200,"msg":"go to login page"}
               NSLog(@"Success: %@", responseObject);
+              
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
           }];
