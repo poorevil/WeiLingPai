@@ -163,7 +163,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *parameters = @{@"deviceId": @"deviceId111",@"portalId":@"zgdx",@"uuid":result};
     
-    [manager POST:[NSString stringWithFormat:@"%@regist/clientRegist",BASEURL] parameters:parameters
+    [manager POST:[NSString stringWithFormat:@"%@/regist/clientRegist",BASEURL] parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               //{"regist_result":200,"msg":"go to login page"}
               NSLog(@"Success: %@", responseObject);

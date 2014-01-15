@@ -178,9 +178,9 @@ static const CGFloat kLicenseButtonPadding = 10;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)drawRect:(CGRect)rect {
 	[super drawRect:rect];
-  if (displayedMessage == nil) {
-    self.displayedMessage = NSLocalizedStringWithDefaultValue(@"OverlayView displayed message", nil, [NSBundle mainBundle], @"Place a barcode inside the viewfinder rectangle to scan it.", @"Place a barcode inside the viewfinder rectangle to scan it.");
-  }
+    if (displayedMessage == nil) {
+        self.displayedMessage = NSLocalizedStringWithDefaultValue(@"OverlayView displayed message", nil, [NSBundle mainBundle], @"Place a barcode inside the viewfinder rectangle to scan it.", @"Place a barcode inside the viewfinder rectangle to scan it.");
+    }
 	CGContextRef c = UIGraphicsGetCurrentContext();
   
 	CGFloat white[4] = {1.0f, 1.0f, 1.0f, 1.0f};
@@ -200,15 +200,15 @@ static const CGFloat kLicenseButtonPadding = 10;
         // Invert height and width, because we are rotated.
         CGPoint textPoint = CGPointMake(self.bounds.size.height / 2 - textSize.width / 2, self.bounds.size.width * -1.0f + 20.0f);
         [text drawAtPoint:textPoint withFont:helvetica15];
-	}
-	else {
-    UIFont *font = [UIFont systemFontOfSize:18];
-    CGSize constraint = CGSizeMake(rect.size.width  - 2 * kTextMargin, cropRect.origin.y);
-    CGSize displaySize = [self.displayedMessage sizeWithFont:font constrainedToSize:constraint];
-    CGRect displayRect = CGRectMake((rect.size.width - displaySize.width) / 2 , cropRect.origin.y - displaySize.height, displaySize.width, displaySize.height);
+	}else {
+        UIFont *font = [UIFont systemFontOfSize:18];
+        CGSize constraint = CGSizeMake(rect.size.width  - 2 * kTextMargin, cropRect.origin.y);
+        CGSize displaySize = [self.displayedMessage sizeWithFont:font constrainedToSize:constraint];
+        CGRect displayRect = CGRectMake((rect.size.width - displaySize.width) / 2 , cropRect.origin.y - displaySize.height, displaySize.width, displaySize.height);
 //    [self.displayedMessage drawInRect:displayRect withFont:font lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentCenter];
         [self.displayedMessage drawInRect:displayRect withFont:font];
 	}
+    
 	CGContextRestoreGState(c);
 	int offset = rect.size.width / 2;
 	if (oneDMode) {
