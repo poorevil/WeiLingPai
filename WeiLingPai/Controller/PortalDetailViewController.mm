@@ -14,13 +14,63 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "MBProgressHUD.h"
 
+@protocol WaitRegistResultDelegate <NSObject>
 
-@interface PortalDetailViewController () <UITableViewDataSource,UITableViewDelegate,ZXingDelegate,MBProgressHUDDelegate>{
+-(void)requestRegistResultDidFinished:(NSDictionary *)jsonDict;
+-(void)requestRegistResultDidFailed:(NSError *)error;
+
+@end
+
+@interface WaitRegistResult : NSObject
+
+@property (nonatomic,copy) NSString *uuid;
+@property (nonatomic,assign) id<WaitRegistResultDelegate> delegate;
+
+@property (nonatomic,assign) WaitRegistResult *bself;
+
+-(void)requestRegistResultByUUID:(NSString *)uuid;
+
+@end
+
+@implementation WaitRegistResult
+
+//等待账号绑定结果
+-(void)requestRegistResultByUUID:(NSString *)uuid
+{
+    self.uuid = uuid;
     
-    BOOL _canWaitRegistResult;//主要用于等待账号绑定的标识，防止self释放后还在执行
+//    __block typeof(self) bself = self;
+    self.bself = self;
+//    __block NSString *uuid_block = self.uuid;
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:[NSString stringWithFormat:@"%@/regist/clientTestRegistResult/%@/",BASEURL,self.uuid] parameters:nil
+         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             [self.bself.delegate requestRegistResultDidFinished:responseObject];
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             [self.bself.delegate requestRegistResultDidFailed:error];
+         }];
 }
 
+-(void)dealloc
+{
+    self.bself = nil;
+    self.uuid = nil;
+    [super dealloc];
+}
+
+@end
+
+
+
+@interface PortalDetailViewController () <UITableViewDataSource,UITableViewDelegate,ZXingDelegate,
+MBProgressHUDDelegate, WaitRegistResultDelegate>{
+    
+}
+
+@property (nonatomic, retain) NSString *uuid;
 @property (nonatomic, retain) MBProgressHUD *hud;
+@property (nonatomic, retain) WaitRegistResult *waitRegistResult;
 
 @end
 
@@ -31,7 +81,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        _canWaitRegistResult = YES;
     }
     return self;
 }
@@ -44,6 +93,17 @@
     [self updateDateAndState];
     
     self.title = self.portalModel.name;
+    
+    UIBarButtonItem *backBtnItem = [[[UIBarButtonItem alloc] initWithTitle:@"< 返回"
+                                                                    style:UIBarButtonItemStyleDone
+                                                                   target:self
+                                                                   action:@selector(navBackBtnAction:)] autorelease];
+    
+    [self.navigationItem setLeftBarButtonItem:backBtnItem];
+    
+    self.waitRegistResult = [[[WaitRegistResult alloc] init] autorelease];
+    self.waitRegistResult.delegate = self;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,7 +114,12 @@
 
 -(void)dealloc
 {
-    _canWaitRegistResult = NO;
+//    NSLog(@"========dealloc=========");
+    
+    self.waitRegistResult.delegate = nil;
+    self.waitRegistResult = nil;
+    
+    self.uuid = nil;
     
     self.loginBtn = nil;
     self.mTableView = nil;
@@ -104,6 +169,13 @@
             forControlEvents:UIControlEventTouchUpInside];
 }
 
+-(void)navBackBtnAction:(id)sender
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 -(void)updateDateAndState
 {
     [self.mTableView reloadData];
@@ -142,42 +214,41 @@
 }
 
 //等待账号绑定结果
--(void)waitRegistResultByUUID:(NSString *)uuid
+-(void)requestRegistResult
 {
-    if(!_canWaitRegistResult) return;
-    
-    __block typeof(self) bself = self;
-//    __block NSString *uuid_block = uuid;
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:[NSString stringWithFormat:@"%@/regist/clientTestRegistResult/%@/",BASEURL,uuid] parameters:nil
-          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              //{"regist_result":200,"msg":"go to login page"}
-              NSLog(@"Success: %@", responseObject);
-              
-              //绑定成功
-              if(responseObject && [[responseObject objectForKey:@"result_code"] integerValue] == 208){
-                    //提示登录成功
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                                message:@"登录成功"
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"cancel"
-                                                      otherButtonTitles:nil];
-                    [alert show];
-                    [alert release];
-                  
-                    //TODO:修改页面状态
-                  
-                  
-              }else{
-                    if(_canWaitRegistResult)
-                        [bself performSelector:@selector(waitRegistResultByUUID:) withObject:uuid afterDelay:1];//1秒后继续尝试
-              }
-              
-              
-          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              NSLog(@"Error: %@", error);
-          }];
+    [self.waitRegistResult requestRegistResultByUUID:self.uuid];
+}
+
+#pragma mark - WaitRegistResultDelegate
+
+-(void)requestRegistResultDidFinished:(NSDictionary *)jsonDict
+{
+    //绑定成功
+    if(jsonDict && [[jsonDict objectForKey:@"result_code"] integerValue] == 208){
+        //提示登录成功
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                    message:@"登录成功"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"cancel"
+                                          otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+
+
+      [self.hud hide:YES];
+      //TODO:修改页面状态
+
+
+    }else{
+//        if(_canWaitRegistResult)
+            [self performSelector:@selector(requestRegistResult) withObject:nil afterDelay:1];//1秒后继续尝试
+    }
+
+}
+
+-(void)requestRegistResultDidFailed:(NSError *)error
+{
+    NSLog(@"Error: %@", error);
 }
 
 #pragma mark - UITableViewDataSource
@@ -244,6 +315,8 @@
 - (void)zxingController:(ZXingWidgetController*)controller didScanResult:(NSString *)result
 {
     NSLog(@"result:%@",result);
+    self.uuid = result;
+    
 //    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
 //                                                    message:result
 //                                                   delegate:nil
@@ -266,7 +339,7 @@
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         NSDictionary *parameters = @{@"deviceId": @"deviceId111",//TODO:生成设备唯一标识
                                      @"portalId":@"1",
-                                     @"uuid":result};
+                                     @"uuid":self.uuid};
 
         [manager POST:[NSString stringWithFormat:@"%@/regist/clientRegist",BASEURL] parameters:parameters
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -278,7 +351,7 @@
               }];
         
         //启动绑定结果监听功能，等待获取绑定结果
-        [self waitRegistResultByUUID:result];
+        [self requestRegistResult];
         
         //启动等待界面
         [self.hud hide:NO];
