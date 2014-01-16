@@ -89,7 +89,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "177"
             endingLineNumber = "177"
-            landmarkName = "-navBackBtnAction:"
+            landmarkName = "-initLoginBtn"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -121,8 +121,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "290"
             endingLineNumber = "290"
-            landmarkName = "-requestRegistResultDidFailed:"
-            landmarkType = "5">
+            landmarkName = "@implementation PortalDetailViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
