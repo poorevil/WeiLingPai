@@ -32,6 +32,8 @@
         
         self.portalArray = [NSMutableArray array];
         
+        
+        //TODO:改用userdefault  http://blog.csdn.net/chyroger/article/details/5785297
         NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"portalList" ofType:@"plist"];
         NSArray *portalList = [[NSArray alloc] initWithContentsOfFile:plistPath];
         

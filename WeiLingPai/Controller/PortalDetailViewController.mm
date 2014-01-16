@@ -14,6 +14,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "MBProgressHUD.h"
 
+#pragma mark - WaitRegistResult
 @protocol WaitRegistResultDelegate <NSObject>
 
 -(void)requestRegistResultDidFinished:(NSDictionary *)jsonDict;
@@ -62,10 +63,10 @@
 @end
 
 
-
+#pragma mark - PortalDetailViewController
 @interface PortalDetailViewController () <UITableViewDataSource,UITableViewDelegate,ZXingDelegate,
 MBProgressHUDDelegate, WaitRegistResultDelegate>{
-    
+    BOOL _isLogined;//是否已登录成功
 }
 
 @property (nonatomic, retain) NSString *uuid;
@@ -81,6 +82,7 @@ MBProgressHUDDelegate, WaitRegistResultDelegate>{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _isLogined = NO;
     }
     return self;
 }
@@ -135,14 +137,21 @@ MBProgressHUDDelegate, WaitRegistResultDelegate>{
 // 初始化登录按钮
 -(void)initLoginBtn
 {
-    //存在accesstoken，登录按钮
-    if (self.portalModel.accessToken && self.portalModel.accessToken.length>0) {
-        [self.loginBtn setTitle:@"登录" forState:UIControlStateNormal];
-        self.loginLabel.text = @"扫描网页上的二维码进行登录";
+    if(!_isLogined){//未登录
+        //存在accesstoken，登录按钮
+        if (self.portalModel.accessToken && self.portalModel.accessToken.length>0) {
+            [self.loginBtn setTitle:@"登录" forState:UIControlStateNormal];
+            self.loginLabel.text = @"扫描网页上的二维码进行登录";
+        }else{
+            //不存在accesstoken，绑定账号按钮
+            [self.loginBtn setTitle:@"登录" forState:UIControlStateNormal];//绑定账号
+            self.loginLabel.text = @"首次登录需要进行账号绑定";
+        }
+        
     }else{
-        //不存在accesstoken，绑定账号按钮
-        [self.loginBtn setTitle:@"登录" forState:UIControlStateNormal];//绑定账号
-        self.loginLabel.text = @"扫描网页上的二维码进行绑定账号";
+        //TODO:已登录成功
+        [self.loginBtn setTitle:@"登出" forState:UIControlStateNormal];
+        self.loginLabel.text = @"点击登出按钮退出登录";
     }
     
     // the space between the image and text
@@ -201,16 +210,24 @@ MBProgressHUDDelegate, WaitRegistResultDelegate>{
 //        [self.navigationController pushViewController:registVC animated:YES];
 //    }
     
-    //二维码
-    ZXingWidgetController *widController = [[ZXingWidgetController alloc] initWithDelegate:self showCancel:YES OneDMode:NO];
-    NSMutableSet *readers = [[NSMutableSet alloc ] init];
-    QRCodeReader* qrcodeReader = [[QRCodeReader alloc] init];
-    [readers addObject:qrcodeReader];
-    [qrcodeReader release];
-    widController.readers = readers;
-    [readers release];
-    [self presentViewController:widController animated:YES completion:nil];
-    [widController release];
+    //未登录
+    if(!_isLogined){
+    
+        //二维码
+        ZXingWidgetController *widController = [[ZXingWidgetController alloc] initWithDelegate:self showCancel:YES OneDMode:NO];
+        NSMutableSet *readers = [[NSMutableSet alloc ] init];
+        QRCodeReader* qrcodeReader = [[QRCodeReader alloc] init];
+        [readers addObject:qrcodeReader];
+        [qrcodeReader release];
+        widController.readers = readers;
+        [readers release];
+        [self presentViewController:widController animated:YES completion:nil];
+        [widController release];
+        
+    }else{
+        //TODO:已登录
+        
+    }
 }
 
 //等待账号绑定结果
@@ -224,6 +241,7 @@ MBProgressHUDDelegate, WaitRegistResultDelegate>{
 -(void)requestRegistResultDidFinished:(NSDictionary *)jsonDict
 {
     //绑定成功
+    //{"result_code":208,"msg":"regist succeed！！！","accessToken":"%s"}
     if(jsonDict && [[jsonDict objectForKey:@"result_code"] integerValue] == 208){
         //提示登录成功
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
@@ -234,14 +252,31 @@ MBProgressHUDDelegate, WaitRegistResultDelegate>{
         [alert show];
         [alert release];
 
-
-      [self.hud hide:YES];
-      //TODO:修改页面状态
-
-
+        _isLogined = YES;
+        
+        [self.hud hide:YES];
+        
+        //保存accessToken
+        NSString *accessToken = [jsonDict objectForKey:@"accessToken"];
+        self.portalModel.accessToken = accessToken;
+        
+        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"portalList" ofType:@"plist"];
+        NSMutableDictionary *portalList = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+        for(NSMutableDictionary *dict in portalList){
+            if([self.portalModel.pid isEqualToString:[dict objectForKey:@"pid"]]){
+                [dict setValue:accessToken forKey:@"accessToken"];
+            }
+        }
+        //保存到plist中
+        [portalList writeToFile:plistPath atomically:NO];
+        
+        
+        //更新登录按钮状态
+        [self initLoginBtn];
+        
     }else{
-//        if(_canWaitRegistResult)
-            [self performSelector:@selector(requestRegistResult) withObject:nil afterDelay:1];//1秒后继续尝试
+
+        [self performSelector:@selector(requestRegistResult) withObject:nil afterDelay:1];//1秒后继续尝试
     }
 
 }
@@ -316,15 +351,6 @@ MBProgressHUDDelegate, WaitRegistResultDelegate>{
 {
     NSLog(@"result:%@",result);
     self.uuid = result;
-    
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-//                                                    message:result
-//                                                   delegate:nil
-//                                          cancelButtonTitle:@"cancel"
-//                                          otherButtonTitles:nil];
-//    [alert show];
-//    [alert release];
-    
     
     if (self.portalModel.accessToken && self.portalModel.accessToken.length > 0) {
 

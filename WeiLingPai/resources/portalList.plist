@@ -8,7 +8,7 @@
 		<key>name</key>
 		<string>中国电信</string>
 		<key>pid</key>
-		<string>pid123</string>
+		<string>1</string>
 		<key>lastLogin</key>
 		<integer>0</integer>
 		<key>iconFileName</key>
@@ -20,7 +20,7 @@
 		<key>name</key>
 		<string>中国电信</string>
 		<key>pid</key>
-		<string>pid123</string>
+		<string>2</string>
 		<key>lastLogin</key>
 		<integer>0</integer>
 		<key>iconFileName</key>
@@ -32,7 +32,7 @@
 		<key>name</key>
 		<string>中国电信</string>
 		<key>pid</key>
-		<string>pid123</string>
+		<string>3</string>
 		<key>lastLogin</key>
 		<integer>0</integer>
 		<key>iconFileName</key>
@@ -44,7 +44,7 @@
 		<key>name</key>
 		<string>中国电信</string>
 		<key>pid</key>
-		<string>pid123</string>
+		<string>4</string>
 		<key>lastLogin</key>
 		<integer>0</integer>
 		<key>iconFileName</key>
@@ -56,7 +56,7 @@
 		<key>name</key>
 		<string>中国电信</string>
 		<key>pid</key>
-		<string>pid123</string>
+		<string>5</string>
 		<key>lastLogin</key>
 		<integer>0</integer>
 		<key>iconFileName</key>
@@ -68,7 +68,7 @@
 		<key>name</key>
 		<string>中国电信</string>
 		<key>pid</key>
-		<string>pid123</string>
+		<string>6</string>
 		<key>lastLogin</key>
 		<integer>0</integer>
 		<key>iconFileName</key>
