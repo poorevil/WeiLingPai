@@ -85,6 +85,7 @@
 		C1AE4FB118868EA000147112 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C1AE4FB018868EA000147112 /* MBProgressHUD.m */; };
 		C1AE4FB41887DD6900147112 /* GlobeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1AE4FB31887DD6900147112 /* GlobeModel.m */; };
 		C1AE4FB81887E68300147112 /* KeyChainTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C1AE4FB71887E68300147112 /* KeyChainTool.m */; };
+		C1AE4FBA1887E90300147112 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1AE4FB91887E90300147112 /* Security.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -233,6 +234,7 @@
 		C1AE4FB31887DD6900147112 /* GlobeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobeModel.m; sourceTree = "<group>"; };
 		C1AE4FB61887E68300147112 /* KeyChainTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyChainTool.h; sourceTree = "<group>"; };
 		C1AE4FB71887E68300147112 /* KeyChainTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyChainTool.m; sourceTree = "<group>"; };
+		C1AE4FB91887E90300147112 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +242,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1AE4FBA1887E90300147112 /* Security.framework in Frameworks */,
 				4EE0E87E1866C39500C7B233 /* CoreMedia.framework in Frameworks */,
 				4E0233D51865FB7900BC1E61 /* CoreVideo.framework in Frameworks */,
 				4E0233E71866002F00BC1E61 /* libZXingWidget.a in Frameworks */,
@@ -290,6 +293,7 @@
 		4E0233731865F99800BC1E61 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C1AE4FB91887E90300147112 /* Security.framework */,
 				4EE0E87D1866C39500C7B233 /* CoreMedia.framework */,
 				4E0233D81865FB8D00BC1E61 /* AddressBook.framework */,
 				4E0233D91865FB8D00BC1E61 /* AddressBookUI.framework */,
