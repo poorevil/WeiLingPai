@@ -7,6 +7,7 @@
 //
 
 #import "GlobeModel.h"
+#import "KeyChainTool.h"
 
 @implementation GlobeModel
 
