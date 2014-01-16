@@ -13,6 +13,7 @@
 #import <QRCodeReader.h>
 #import "AFHTTPRequestOperationManager.h"
 #import "MBProgressHUD.h"
+#import "GlobeModel.h"
 
 #pragma mark - WaitRegistResult
 @protocol WaitRegistResultDelegate <NSObject>
@@ -363,8 +364,8 @@ MBProgressHUDDelegate, WaitRegistResultDelegate>{
         
         //提交二维码内容，账号绑定第一步
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSDictionary *parameters = @{@"deviceId": @"deviceId111",//TODO:生成设备唯一标识
-                                     @"portalId":@"1",
+        NSDictionary *parameters = @{@"deviceId": [GlobeModel sharedSingleton].deviceId,
+                                     @"portalId":self.portalModel.pid,
                                      @"uuid":self.uuid};
 
         [manager POST:[NSString stringWithFormat:@"%@/regist/clientRegist",BASEURL] parameters:parameters

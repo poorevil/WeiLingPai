@@ -10,4 +10,7 @@
 
 @interface GlobeModel : NSObject
 
+@property (nonatomic,retain) NSString *deviceId;
+
++(GlobeModel *)sharedSingleton;
 @end
