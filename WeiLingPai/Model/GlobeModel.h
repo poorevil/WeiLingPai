@@ -13,4 +13,10 @@
 @property (nonatomic,retain) NSString *deviceId;
 
 +(GlobeModel *)sharedSingleton;
+
+//获取portal list
+-(NSMutableArray *)getPortalList;
+
+//保存portal list
+-(void)savePortalList:(NSMutableArray *)portalList;
 @end

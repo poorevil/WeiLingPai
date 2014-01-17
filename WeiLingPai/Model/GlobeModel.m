@@ -10,6 +10,7 @@
 #import "KeyChainTool.h"
 
 #define kDeviceID   @"deviceId"
+#define kUserDefaultPortalListKey   @"kUserDefaultPortalListKey"
 
 @implementation GlobeModel
 
@@ -53,6 +54,30 @@
     
     return uuidString ;
     
+}
+
+//获取portal list
+-(NSMutableArray *)getPortalList
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSData *data = [ud objectForKey:kUserDefaultPortalListKey];
+    
+    if(data.length>0){
+        NSMutableArray *portalList = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        return portalList;
+    }
+    
+    return nil;
+}
+
+//保存portal list
+-(void)savePortalList:(NSMutableArray *)portalList
+{
+    if(portalList.count > 0){
+        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+        NSData *udObject = [NSKeyedArchiver archivedDataWithRootObject:portalList];
+        [ud setObject:udObject forKey:kUserDefaultPortalListKey];
+    }
 }
 
 -(void)dealloc

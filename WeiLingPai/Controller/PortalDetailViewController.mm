@@ -139,12 +139,12 @@ MBProgressHUDDelegate, WaitRegistResultDelegate>{
 -(void)initLoginBtn
 {
     if(!_isLogined){//未登录
-        //存在accesstoken，登录按钮
-        if (self.portalModel.accessToken && self.portalModel.accessToken.length>0) {
+        //登录按钮
+        if (self.portalModel.isRegisted) {
             [self.loginBtn setTitle:@"登录" forState:UIControlStateNormal];
             self.loginLabel.text = @"扫描网页上的二维码进行登录";
         }else{
-            //不存在accesstoken，绑定账号按钮
+            //绑定账号按钮
             [self.loginBtn setTitle:@"登录" forState:UIControlStateNormal];//绑定账号
             self.loginLabel.text = @"首次登录需要进行账号绑定";
         }
@@ -190,7 +190,7 @@ MBProgressHUDDelegate, WaitRegistResultDelegate>{
 {
     [self.mTableView reloadData];
     
-    if (self.portalModel.accessToken && self.portalModel.accessToken.length > 0){
+    if (self.portalModel.isRegisted){
         self.mTableView.allowsSelection = YES;
     }else{
         self.mTableView.allowsSelection = NO;
@@ -257,19 +257,18 @@ MBProgressHUDDelegate, WaitRegistResultDelegate>{
         
         [self.hud hide:YES];
         
-        //保存accessToken
-        NSString *accessToken = [jsonDict objectForKey:@"accessToken"];
-        self.portalModel.accessToken = accessToken;
+        //保存绑定成功状态
+//        NSString *accessToken = [jsonDict objectForKey:@"accessToken"];
+        self.portalModel.isRegisted = YES;
         
-        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"portalList" ofType:@"plist"];
-        NSMutableDictionary *portalList = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-        for(NSMutableDictionary *dict in portalList){
-            if([self.portalModel.pid isEqualToString:[dict objectForKey:@"pid"]]){
-                [dict setValue:accessToken forKey:@"accessToken"];
+        NSMutableArray *portalList = [[GlobeModel sharedSingleton] getPortalList];
+        for(PortalModel *pm in portalList){
+            if([self.portalModel.pid isEqualToString:pm.pid]){
+                pm.isRegisted = YES;
             }
         }
         //保存到plist中
-        [portalList writeToFile:plistPath atomically:NO];
+        [[GlobeModel sharedSingleton] savePortalList:portalList];
         
         
         //更新登录按钮状态
@@ -323,7 +322,7 @@ MBProgressHUDDelegate, WaitRegistResultDelegate>{
             break;
     }
     
-    if (self.portalModel.accessToken && self.portalModel.accessToken.length > 0){
+    if (self.portalModel.isRegisted){
         cell.textLabel.enabled = YES;
         cell.detailTextLabel.enabled = YES;
     }else{
@@ -338,7 +337,7 @@ MBProgressHUDDelegate, WaitRegistResultDelegate>{
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.portalModel.accessToken && self.portalModel.accessToken.length > 0) {
+    if (self.portalModel.isRegisted) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         
         
@@ -353,7 +352,7 @@ MBProgressHUDDelegate, WaitRegistResultDelegate>{
     NSLog(@"result:%@",result);
     self.uuid = result;
     
-    if (self.portalModel.accessToken && self.portalModel.accessToken.length > 0) {
+    if (self.portalModel.isRegisted) {
 
         //TODO:登录
         

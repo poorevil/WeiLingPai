@@ -10,15 +10,21 @@
 #import "PortalModel.h"
 #import "MainViewCell.h"
 #import "MainViewHeaderView.h"
-
+#import "AFHTTPRequestOperationManager.h"
 #import "CycleScrollView.h"
+#import "PortalListResponseSerializer.h"
+#import "GlobeModel.h"
 
-@interface MainViewController () <UITableViewDataSource,UITableViewDelegate>
+#import "MBProgressHUD.h"
+
+@interface MainViewController () <UITableViewDataSource,UITableViewDelegate,MBProgressHUDDelegate>
 
 @property (nonatomic,retain) NSMutableArray *portalArray;
 
 @property (nonatomic,retain) CycleScrollView *cycleScrollView;//循环滚动scrollView
 @property (nonatomic,retain) NSMutableArray *headerScrollViewArray;//轮播图数组
+
+@property (nonatomic,retain) MBProgressHUD *hud;
 
 @end
 
@@ -31,17 +37,6 @@
         // Custom initialization
         
         self.portalArray = [NSMutableArray array];
-        
-        
-        //TODO:改用userdefault  http://blog.csdn.net/chyroger/article/details/5785297
-        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"portalList" ofType:@"plist"];
-        NSArray *portalList = [[NSArray alloc] initWithContentsOfFile:plistPath];
-        
-        for (NSDictionary *dict in portalList) {
-            PortalModel *model = [[[PortalModel alloc] initWithDictionary:dict] autorelease];
-            
-            [self.portalArray addObject:model];
-        }
         
     }
     return self;
@@ -59,6 +54,8 @@
                                                                    owner:self
                                                                   options:nil] objectAtIndex:0];
     [self.sliderViewParent addSubview:headerView];
+    
+    [self initPortalList];
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,8 +67,62 @@
 -(void)dealloc
 {
     self.sliderViewParent = nil;
+    self.hud.delegate = nil;
+    self.hud = nil;
+    
+    self.portalArray = nil;
+    
+    self.cycleScrollView = nil;//循环滚动scrollView
+    self.headerScrollViewArray = nil;//轮播图数组
     
     [super dealloc];
+}
+
+#pragma mark - private method
+//初始化portal list
+-(void)initPortalList
+{
+    NSMutableArray *portalList = [[GlobeModel sharedSingleton] getPortalList];
+    if(portalList!=nil && portalList.count>0)
+    {
+        self.portalArray = [NSMutableArray arrayWithArray:portalList];
+    }else{
+        //启动等待界面
+        [self.hud hide:NO];
+        self.hud = [[[MBProgressHUD alloc] initWithView:self.view] autorelease];
+        [self.view addSubview:self.hud];
+        self.hud.dimBackground = YES;
+        self.hud.delegate = self;
+        self.hud.mode = MBProgressHUDModeIndeterminate;
+        self.hud.labelText = @"正在获取门户列表，请稍后...";
+        [self.hud show:NO];
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSDictionary *parameters = @{@"appid": APP_ID,@"deviceId":[GlobeModel sharedSingleton].deviceId};
+        manager.responseSerializer = [PortalListResponseSerializer serializer];
+        [manager GET:[NSString stringWithFormat:@"%@/interface/portalList",BASEURL]
+          parameters:parameters
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 NSLog(@"Success: %@", responseObject);
+                 
+                 if ([responseObject isKindOfClass:[NSArray class]]) {
+                     self.portalArray = [NSMutableArray arrayWithArray:responseObject];
+                     [[GlobeModel sharedSingleton] savePortalList:self.portalArray];
+                     
+                     [self.mTableView reloadData];
+                 }
+                 
+                 [self.hud hide:YES];
+                 
+             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                 NSLog(@"Error: %@", error);
+                 //TODO:处理失败请求
+                 
+                 self.hud.labelText = @"获取门户列表失败!";
+                 [self.hud hide:YES afterDelay:3];
+             }];
+
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -107,5 +158,10 @@
     return 100;
 }
 
+#pragma mark - MBProgressHUDDelegate
+- (void)hudWasHidden:(MBProgressHUD *)hud
+{
+    [self.hud removeFromSuperview];
+}
 
 @end

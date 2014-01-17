@@ -55,7 +55,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *parameters = @{@"appid": APP_ID};
     manager.responseSerializer = [SliderResponseSerializer serializer];
-    [manager GET:[NSString stringWithFormat:@"%@/sliderList",BASEURL]
+    [manager GET:[NSString stringWithFormat:@"%@/interface/sliderList",BASEURL]
       parameters:parameters
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
              NSLog(@"Success: %@", [responseObject class]);
