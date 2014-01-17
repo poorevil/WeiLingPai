@@ -245,17 +245,18 @@ MBProgressHUDDelegate, WaitRegistResultDelegate>{
     //{"result_code":208,"msg":"regist succeed！！！","accessToken":"%s"}
     if(jsonDict && [[jsonDict objectForKey:@"result_code"] integerValue] == 208){
         //提示登录成功
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                    message:@"登录成功"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"cancel"
-                                          otherButtonTitles:nil];
-        [alert show];
-        [alert release];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+//                                                    message:@"登录成功"
+//                                                   delegate:nil
+//                                          cancelButtonTitle:@"cancel"
+//                                          otherButtonTitles:nil];
+//        [alert show];
+//        [alert release];
 
         _isLogined = YES;
         
-        [self.hud hide:YES];
+        self.hud.labelText = @"登录成功";
+        [self.hud hide:YES afterDelay:3];
         
         //保存绑定成功状态
 //        NSString *accessToken = [jsonDict objectForKey:@"accessToken"];
@@ -352,33 +353,83 @@ MBProgressHUDDelegate, WaitRegistResultDelegate>{
     NSLog(@"result:%@",result);
     self.uuid = result;
     
+    
+        
+    //提交二维码内容，账号绑定第一步
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *parameters = @{@"deviceId": [GlobeModel sharedSingleton].deviceId,
+                                 @"portalId":self.portalModel.pid,
+                                 @"uuid":self.uuid};
+    
+    [manager POST:[NSString stringWithFormat:@"%@/regist/clientRegist",BASEURL] parameters:parameters
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              //{"regist_result":200,"msg":"go to login page"}
+              NSLog(@"Success: %@", responseObject);
+              
+              if (self.portalModel.isRegisted) {
+                  
+                  //TODO:登录
+                  if([responseObject isKindOfClass:[NSDictionary class]]){
+                      NSInteger resultCode = [[responseObject objectForKey:@"regist_result"] integerValue];
+                      if(resultCode==201){
+                          //登录成功
+                          self.hud.labelText = @"登录成功";
+                          [self.hud hide:YES afterDelay:3];
+                          
+                          _isLogined = YES;
+                          
+                          //更新登录按钮状态
+                          [self initLoginBtn];
+                          
+                      }else{
+                          //登录失败
+                          self.hud.labelText = @"登录失败，请重试";
+                          [self.hud hide:YES afterDelay:3];
+                      }
+                  }
+                  
+                  
+              }else{
+                  //TODO:账号绑定 暂时啥都不做，进入下一步
+              }
+              
+          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error: %@", error);
+              if (self.portalModel.isRegisted) {
+                  //TODO:登录
+                  
+                  //登录失败
+                  self.hud.labelText = @"登录失败，请重试";
+                  [self.hud hide:YES afterDelay:3];
+                  
+              }else{
+                  //TODO:账号绑定
+                  //账号绑定失败
+                  self.hud.labelText = @"数据提交失败，请重试";
+                  [self.hud hide:YES afterDelay:3];
+              }
+          }];
+    
+    
     if (self.portalModel.isRegisted) {
-
+        
         //TODO:登录
-        
-        
+        //启动等待界面
+        [self.hud hide:NO];
+        self.hud = [[[MBProgressHUD alloc] initWithView:self.view] autorelease];
+        [self.view addSubview:self.hud];
+        self.hud.dimBackground = YES;
+        self.hud.delegate = self;
+        self.hud.mode = MBProgressHUDModeIndeterminate;
+        self.hud.labelText = @"登录中，请稍后...";
+        [self.hud show:NO];
         
     }else{
         //TODO:账号绑定
-        
-        //提交二维码内容，账号绑定第一步
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSDictionary *parameters = @{@"deviceId": [GlobeModel sharedSingleton].deviceId,
-                                     @"portalId":self.portalModel.pid,
-                                     @"uuid":self.uuid};
 
-        [manager POST:[NSString stringWithFormat:@"%@/regist/clientRegist",BASEURL] parameters:parameters
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  //{"regist_result":200,"msg":"go to login page"}
-                  NSLog(@"Success: %@", responseObject);
-
-              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  NSLog(@"Error: %@", error);
-              }];
-        
         //启动绑定结果监听功能，等待获取绑定结果
         [self requestRegistResult];
-        
+    
         //启动等待界面
         [self.hud hide:NO];
         self.hud = [[[MBProgressHUD alloc] initWithView:self.view] autorelease];
@@ -388,10 +439,50 @@ MBProgressHUDDelegate, WaitRegistResultDelegate>{
         self.hud.mode = MBProgressHUDModeIndeterminate;
         self.hud.labelText = @"登录中，请注意网页内容变化";
         [self.hud show:NO];
-    
     }
-
+    
     [controller dismissViewControllerAnimated:NO completion:nil];
+    
+//    if (self.portalModel.isRegisted) {
+//
+//        //TODO:登录
+//        
+//        
+//        
+//    }else{
+//        //TODO:账号绑定
+//        
+//        //提交二维码内容，账号绑定第一步
+//        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//        NSDictionary *parameters = @{@"deviceId": [GlobeModel sharedSingleton].deviceId,
+//                                     @"portalId":self.portalModel.pid,
+//                                     @"uuid":self.uuid};
+//
+//        [manager POST:[NSString stringWithFormat:@"%@/regist/clientRegist",BASEURL] parameters:parameters
+//              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                  //{"regist_result":200,"msg":"go to login page"}
+//                  NSLog(@"Success: %@", responseObject);
+//
+//              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                  NSLog(@"Error: %@", error);
+//              }];
+//        
+//        //启动绑定结果监听功能，等待获取绑定结果
+//        [self requestRegistResult];
+//        
+//        //启动等待界面
+//        [self.hud hide:NO];
+//        self.hud = [[[MBProgressHUD alloc] initWithView:self.view] autorelease];
+//        [self.view addSubview:self.hud];
+//        self.hud.dimBackground = YES;
+//        self.hud.delegate = self;
+//        self.hud.mode = MBProgressHUDModeIndeterminate;
+//        self.hud.labelText = @"登录中，请注意网页内容变化";
+//        [self.hud show:NO];
+//    
+//    }
+//
+//    [controller dismissViewControllerAnimated:NO completion:nil];
 }
 
 - (void)zxingControllerDidCancel:(ZXingWidgetController*)controller

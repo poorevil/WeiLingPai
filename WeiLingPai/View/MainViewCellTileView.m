@@ -55,9 +55,7 @@
     [self addGestureRecognizer:tapAction];
     [tapAction release];
     
-    [self.iconView setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle]
-                                                              pathForResource:self.model.iconFileName
-                                                              ofType:@"png"]]];
+    [self.iconView setImageURL:[NSURL URLWithString:self.model.iconFileName]];
     if (self.model.lastLogin>0) {
         
         NSDateFormatter *df = [[NSDateFormatter alloc] init];

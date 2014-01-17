@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 
 #import "PortalModel.h"
+#import "EGOImageView.h"
 
 @interface MainViewCellTileView : UIView
 
 @property (nonatomic,retain) PortalModel *model;
 
-@property (nonatomic,retain) IBOutlet UIImageView *iconView;
+@property (nonatomic,retain) IBOutlet EGOImageView *iconView;
 @property (nonatomic,retain) IBOutlet UILabel *lastLoginLabel;
 
 @end
